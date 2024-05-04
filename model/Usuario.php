@@ -1,7 +1,7 @@
 <?php
  
 require_once 'Banco.php';
-require_once '../Conexao.php';
+require_once 'Conexao.php';
  
 class Usuario extends Banco{
  
@@ -52,9 +52,21 @@ class Usuario extends Banco{
         $query = "insert into usuario (id, login, senha, permissao) values (null,:login,:senha,:permissao)";
         //cria a conexão com o banco de dados
         if($conn = $conexao->getConection()){
+            if($this->id > 0){
+                //cria query de update passando os atributos que serão atualizados
+                $query = "UPDATE usuario SET login = :login, senha = :senha, permissao = :permissao WHERE id = :id";           
+                //Prepara a query para execução
+                $stmt = $conn->prepare($query);
+                //executa a query
+                if($stmt->execute(array(':login' => $this->login, ':senha' => $this->senha, ':permissao' => $this->permissao))){
+                    $result = $stmt->rowCount();
+                }
+            }
+        }else{
+            //cria query de inserção passando os atributos que serão armazenados
+            $query = "insert into usuario (id, login, senha, permissao) values (null,:login,:senha,:permissao)";
             //Prepara a query para execução
             $stmt = $conn->prepare($query);
-            //executa a query
             if($stmt->execute(array(':login' => $this->login, ':senha' => $this->senha, ':permissao' => $this->permissao))){
                 $result = $stmt->rowCount();
             }
@@ -68,6 +80,25 @@ class Usuario extends Banco{
 
     public function find($id){
 
+        //Cria um objeto do tipo conexão
+        $conexao = new Conexao();
+        //Cria a conexao com o banco de dados
+        $conn = $conexao->getConection();
+        //Cria query de seleção
+        $query = "SELECT * FROM usuario where id = :id";
+        //Prepara a query para execução
+        $stmt = $conn->prepare($query);
+        //executa a query
+        if ($stmt->execute(array(':id'=> $id))) {
+            //verifica se houve algum registro encontrado
+            if ($stmt->rowCount() > 0) {
+                //o resultado da busca será retornado como um objeto de classe
+                $result = $stmt->fetchObject(Usuario::class);
+            }else{
+                $result = false;
+            }
+        }
+        return $result;
     }
 
     public function listAll(){
