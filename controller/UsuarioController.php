@@ -28,6 +28,30 @@ class UsuarioController {
         //chama o método listAll()
         return $usuarios->listAll();
     }
+
+    /**
+     * Mostrar formulário para editar um usuario
+     */
+    public static function editar($id){
+
+        //Cria um objeto do tipo Usuario
+        $usuario = new Usuario;
+
+        $usuario = $usuario->find($id);
+
+        return $usuario;
+    }
+
+    /**
+     * Apagar um usuario conforme o id informado
+     */
+    public static function ecluir($id){
+
+        //Cria um objeto do tipo Usuario
+        $usuario = new Usuario;
+
+        $usuario = $usuario->remove($id);
+    }
 }
 
 ?>

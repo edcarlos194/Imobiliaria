@@ -75,7 +75,21 @@ class Usuario extends Banco{
     }
 
     public function remove($id){
-
+        
+        $result = false;
+        //Cria um objeto do tipo conexão
+        $conexao = new Conexao();
+        //Cria a conexao com o banco de dados
+        $conn = $conexao->getConection();
+        //Cria query de remoção
+        $query = "DELETE FROM usuario where id = :id";
+        //Prepara a query para execução
+        $stmt = $conn->prepare($query);
+        //Executa a query
+        if ($stmt->execute(array(':id'=> $id))) {
+            $result = true;
+        }
+        return $result;
     }
 
     public function find($id){
