@@ -22,8 +22,13 @@
             <option value="C" <?php echo isset($usuario) && $usuario->getPermissao()=='A'?'selected':'' ?>>Comum</option>
         </select><br/><br/>
         <input type="hidden" name="id" id="id"
-        value="<?php echo isset($usuario)?$usuario->getId():''; ?>" />
-        <input type="submit" name="btnSalvar" id="btnSalvar" <?php header('Location: index.php?action=listar'); ?>/>
+        value="<?php echo isset($usuario)?$usuario->getId():''; ?>"/>
+        <input type="submit" name="btnSalvar" id="btnSalvar"/>
+        <?php
+        if (isset($_GET['btnsalvar'])){
+            header('Location: index.php?action=listar');
+        }
+        ?>
     </form>
 </body>
 </html>
