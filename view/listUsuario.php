@@ -17,7 +17,7 @@
             $usuarios = call_user_func(array('UsuarioController','listar'));
             //Verifica se houve algum retorno
             if (isset($usuarios) && !empty($usuarios)) {
-                foreach ($usuarios as $usuarios) {
+                foreach ($usuarios as $usuario) {
                     ?>
                     <tr>
                         <!-- Como o retorno é um objeto, devemos chamar os get para mostrar o resultado -->
