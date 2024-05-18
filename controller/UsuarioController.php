@@ -8,9 +8,10 @@ class UsuarioController {
     public static function salvar(){
 
         //cria um objeto do tipo Usuario
-        $usuario = new Usuario;
+        $usuario = new Usuario();
 
         //armazena as informações do $_POST via set
+        $usuario->setId($_POST['id']);
         $usuario->setLogin($_POST['login']);
         $usuario->setSenha($_POST['senha1']);
         $usuario->setPermissao($_POST['permissao']);
@@ -24,7 +25,7 @@ class UsuarioController {
     */
     public static function listar(){
         //cria um objeto do tipo Usuario
-        $usuarios = new Usuario;
+        $usuarios = new Usuario();
         //chama o método listAll()
         return $usuarios->listAll();
     }
@@ -35,7 +36,7 @@ class UsuarioController {
     public static function editar($id){
 
         //Cria um objeto do tipo Usuario
-        $usuario = new Usuario;
+        $usuario = new Usuario();
 
         $usuario = $usuario->find($id);
 
@@ -45,10 +46,10 @@ class UsuarioController {
     /**
      * Apagar um usuario conforme o id informado
      */
-    public static function ecluir($id){
+    public static function excluir($id){
 
         //Cria um objeto do tipo Usuario
-        $usuario = new Usuario;
+        $usuario = new Usuario();
 
         $usuario = $usuario->remove($id);
     }

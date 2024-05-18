@@ -53,22 +53,25 @@ class Usuario extends Banco{
         //cria a conexão com o banco de dados
         if($conn = $conexao->getConection()){
             if($this->id > 0){
+                echo "aaaa";
                 //cria query de update passando os atributos que serão atualizados
                 $query = "UPDATE usuario SET login = :login, senha = :senha, permissao = :permissao WHERE id = :id";           
                 //Prepara a query para execução
                 $stmt = $conn->prepare($query);
                 //executa a query
-                if($stmt->execute(array(':login' => $this->login, ':senha' => $this->senha, ':permissao' => $this->permissao))){
+                if($stmt->execute(array(':id' => $this->id, ':login' => $this->login, ':senha' => $this->senha, ':permissao' => $this->permissao))){
                     $result = $stmt->rowCount();
                 }
             }
-        }else{
-            //cria query de inserção passando os atributos que serão armazenados
-            $query = "insert into usuario (id, login, senha, permissao) values (null,:login,:senha,:permissao)";
-            //Prepara a query para execução
-            $stmt = $conn->prepare($query);
-            if($stmt->execute(array(':login' => $this->login, ':senha' => $this->senha, ':permissao' => $this->permissao))){
-                $result = $stmt->rowCount();
+            else{
+                echo "bbbb";
+                //cria query de inserção passando os atributos que serão armazenados
+                $query = "insert into usuario (id, login, senha, permissao) values (null,:login,:senha,:permissao)";
+                //Prepara a query para execução
+                $stmt = $conn->prepare($query);
+                if($stmt->execute(array(':login' => $this->login, ':senha' => $this->senha, ':permissao' => $this->permissao))){
+                    $result = $stmt->rowCount();
+                }
             }
         }
         return $result;

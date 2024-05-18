@@ -6,7 +6,7 @@
             <tr>
                 <th>Login</th>
                 <th>Permissão</th>
-                <th><a href="cadUsuario">Novo</a></th>
+                <th><a href="index.php">Novo</a></th>
             </tr>
         </thead>
         <tbody>

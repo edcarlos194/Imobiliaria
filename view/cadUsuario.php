@@ -24,11 +24,6 @@
         <input type="hidden" name="id" id="id"
         value="<?php echo isset($usuario)?$usuario->getId():''; ?>"/>
         <input type="submit" name="btnSalvar" id="btnSalvar"/>
-        <?php
-        if (isset($_GET['btnsalvar'])){
-            header('Location: index.php?action=listar');
-        }
-        ?>
     </form>
 </body>
 </html>
@@ -42,6 +37,7 @@ if(isset($_POST['btnSalvar'])){
     require_once 'controller/UsuarioController.php';
     //Chama uma função PHP que permite informar a classe e o método que será acionado
     call_user_func(array('UsuarioController','salvar'));
+    header('Location: index.php?action=listar');
 }
 
 ?>
