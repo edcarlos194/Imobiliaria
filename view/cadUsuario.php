@@ -37,7 +37,7 @@ if(isset($_POST['btnSalvar'])){
     require_once 'controller/UsuarioController.php';
     //Chama uma função PHP que permite informar a classe e o método que será acionado
     call_user_func(array('UsuarioController','salvar'));
-    header('Location: index.php?action=listar');
+    header('Location: index.php?page=usuario&action=listar');
 }
 
 ?>
